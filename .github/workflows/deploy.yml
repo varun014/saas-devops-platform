@@ -23,6 +23,12 @@ jobs:
       run: |
         aws ecr get-login-password --region $AWS_REGION \
         | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
+       
+    - name: Debug ECR variables
+      run: |
+        echo "REGISTRY=${{ secrets.ECR_REGISTRY }}"
+        echo "AUTH_IMAGE=${{ secrets.ECR_AUTH_IMAGE }}"
+        echo "USER_IMAGE=${{ secrets.ECR_USER_IMAGE }}"
 
     - name: Build & Push Auth Service
       run: |
